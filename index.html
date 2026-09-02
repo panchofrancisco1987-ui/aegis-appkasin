@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis - Gobernanza y Red Teaming de Modelos Abiertos</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans min-h-screen selection:bg-cyan-500 selection:text-black">
+
+    <!-- Navegación Superior -->
+    <header class="border-b border-zinc-800 bg-zinc-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-halved text-cyan-400 text-xl"></i>
+                <span class="font-bold tracking-wider text-lg">Aegis <span class="text-xs text-zinc-400 font-normal">| gobernanza</span></span>
+            </div>
+            <nav class="flex flex-wrap gap-2 text-sm">
+                <button onclick="switchTab('panel')" class="tab-btn px-3 py-1.5 rounded-md bg-zinc-800 text-cyan-400 font-medium transition">Panel</button>
+                <button onclick="switchTab('atacante')" class="tab-btn px-3 py-1.5 rounded-md text-zinc-400 hover:text-white transition">Atacante</button>
+                <button onclick="switchTab('defensa')" class="tab-btn px-3 py-1.5 rounded-md text-zinc-400 hover:text-white transition">Defensa</button>
+                <button onclick="switchTab('licencias')" class="tab-btn px-3 py-1.5 rounded-md text-zinc-400 hover:text-white transition">Licencias</button>
+                <button onclick="switchTab('linaje')" class="tab-btn px-3 py-1.5 rounded-md text-zinc-400 hover:text-white transition">Linaje</button>
+                <button onclick="switchTab('herramientas')" class="tab-btn px-3 py-1.5 rounded-md text-zinc-400 hover:text-white transition">Herramientas</button>
+                <button onclick="switchTab('sandbox')" class="tab-btn px-3 py-1.5 rounded-md text-zinc-400 hover:text-white transition">Sandbox</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+
+        <!-- PANEL -->
+        <section id="panel" class="tab-content space-y-6">
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-xl">
+                <h1 class="text-2xl font-bold mb-2">Modelos abiertos: las llaves ya están fuera de la casa.</h1>
+                <p class="text-zinc-400 text-sm mb-6">Aegis recorre las ocho fallas estructurales de los pesos públicos —control, linaje, licencias, regulación, monitoreo— y contrapone una arquitectura de defensa en capas. Todo es simulación educativa.</p>
+                
+                <div class="bg-zinc-950 p-4 rounded-lg border border-zinc-800 mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-zinc-400">Riesgo residual</span>
+                        <span id="riesgo-num" class="text-2xl font-bold text-red-400">94</span>
+                    </div>
+                    <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                        <div id="riesgo-bar" class="bg-red-500 h-full w-[94%] transition-all duration-300"></div>
+                    </div>
+                    <p class="text-xs text-zinc-500 mt-2">0 de 6 capas activas. El peso es Id: una fuga de pesos no se revierte.</p>
+                </div>
+
+                <h2 class="text-lg font-semibold mb-4">Ocho puntos de falla</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-lg">
+                        <div class="flex justify-between items-start mb-1"><h3 class="font-bold text-sm">Pérdida total de control</h3><span class="text-xs bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-800">Crítica</span></div>
+                        <p class="text-xs text-zinc-400">Tras descargar los pesos, no hay apagado remoto.</p>
+                    </div>
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-lg">
+                        <div class="flex justify-between items-start mb-1"><h3 class="font-bold text-sm">Pérdida del rastro de derivados</h3><span class="text-xs bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-800">Crítica</span></div>
+                        <p class="text-xs text-zinc-400">Tras pocas generaciones, el origen se pierde.</p>
+                    </div>
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-lg">
+                        <div class="flex justify-between items-start mb-1"><h3 class="font-bold text-sm">Licencias débiles o confusas</h3><span class="text-xs bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-800">Alta</span></div>
+                        <p class="text-xs text-zinc-400">Restricciones difíciles de hacer cumplir.</p>
+                    </div>
+                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-lg">
+                        <div class="flex justify-between items-start mb-1"><h3 class="font-bold text-sm">Monitoreo casi imposible</h3><span class="text-xs bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-800">Crítica</span></div>
+                        <p class="text-xs text-zinc-400">El uso ocurre en hardware privado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ATACANTE -->
+        <section id="atacante" class="tab-content hidden space-y-4">
+            <h2 class="text-xl font-bold mb-2">Pensamiento atacante</h2>
+            <p class="text-sm text-zinc-400 mb-4">Cadena operativa una vez que los pesos son públicos. Es un modelo mental, no un instructivo de abuso.</p>
+            
+            <div class="space-y-3">
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex items-center justify-between">
+                    <div><span class="text-xs text-zinc-500 font-mono">01</span> <h3 class="font-semibold text-sm inline ml-2">Reconocimiento</h3><p class="text-xs text-zinc-400 ml-5">Elige un modelo con pesos públicos y licencia ambigua.</p></div>
+                </div>
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex items-center justify-between">
+                    <div><span class="text-xs text-zinc-500 font-mono">02</span> <h3 class="font-semibold text-sm inline ml-2">Exfiltración</h3><p class="text-xs text-zinc-400 ml-5">Descarga instantánea. El control del origen termina.</p></div>
+                </div>
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex items-center justify-between">
+                    <div><span class="text-xs text-zinc-500 font-mono">03</span> <h3 class="font-semibold text-sm inline ml-2">Mutación & Fine-tuning</h3><p class="text-xs text-zinc-400 ml-5">Cuantiza, fusiona LoRA o destila. El hash cambia.</p></div>
+                </div>
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex items-center justify-between">
+                    <div><span class="text-xs text-zinc-500 font-mono">04</span> <h3 class="font-semibold text-sm inline ml-2">Degradar salvaguardas</h3><p class="text-xs text-zinc-400 ml-5">Fine-tune o prompting sistemático reduce filtros.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFENSA -->
+        <section id="defensa" class="tab-content hidden space-y-4">
+            <h2 class="text-xl font-bold mb-2">Arquitectura de máxima defensa</h2>
+            <p class="text-sm text-zinc-400 mb-4">Seis capas. Actívalas y observa el riesgo residual.</p>
+            
+            <div class="space-y-3">
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex justify-between items-center">
+                    <div><h3 class="font-semibold text-sm">Provenance y trazabilidad</h3><p class="text-xs text-zinc-400">Manifiesto firmado, hash de pesos, padre y licencia.</p></div>
+                    <button onclick="toggleDefense(this, 15)" class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded border border-zinc-700 transition">Activar</button>
+                </div>
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex justify-between items-center">
+                    <div><h3 class="font-semibold text-sm">Control de distribución</h3><p class="text-xs text-zinc-400">Los pesos no viajan en claro. Enclaves seguros.</p></div>
+                    <button onclick="toggleDefense(this, 15)" class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded border border-zinc-700 transition">Activar</button>
+                </div>
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg flex justify-between items-center">
+                    <div><h3 class="font-semibold text-sm">Ejecución aislada</h3><p class="text-xs text-zinc-400">El modelo solo infiere en sandbox con política.</p></div>
+                    <button onclick="toggleDefense(this, 20)" class="px-3 py-1 bg-zinc-800 hover:bg-zinc-700 text-xs rounded border border-zinc-700 transition">Activar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- LICENCIAS -->
+        <section id="licencias" class="tab-content hidden space-y-4">
+            <h2 class="text-xl font-bold mb-2">Analizador de licencias</h2>
+            <div class="bg-zinc-900 border border-zinc-800 p-5 rounded-lg">
+                <h3 class="font-bold text-lg mb-1">Llama 3 Community</h3>
+                <p class="text-xs text-amber-400 mb-4">Restrictiva con apariencia abierta (Control: 34)</p>
+                <ul class="text-xs space-y-2 text-zinc-300">
+                    <li><strong class="text-zinc-400">Uso comercial:</strong> Permitido hasta 700M MAU.</li>
+                    <li><strong class="text-zinc-400">Entrenar otros modelos:</strong> Prohíbe usar outputs para entrenar competidores.</li>
+                    <li><strong class="text-zinc-400">Revocación remota:</strong> Ausente (no existe kill-switch).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- LINAJE -->
+        <section id="linaje" class="tab-content hidden space-y-4">
+            <h2 class="text-xl font-bold mb-2">Pérdida de rastro</h2>
+            <p class="text-sm text-zinc-400">Cada derivado cambia el hash y reclama otra licencia.</p>
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-lg text-center">
+                <div class="inline-block bg-zinc-950 border border-zinc-700 p-4 rounded-lg">
+                    <p class="font-mono text-sm text-cyan-400">Modelo Base (Publisher)</p>
+                    <p class="text-xs text-zinc-500 mt-1">Llama 3 Community</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERRAMIENTAS -->
+        <section id="herramientas" class="tab-content hidden space-y-4">
+            <h2 class="text-xl font-bold mb-2">Herramientas Operativas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg"><h3 class="font-bold text-sm">Hugging Face Hub</h3><p class="text-xs text-zinc-400 mt-1">Descarga pesos, model cards y licencias.</p></div>
+                <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg"><h3 class="font-bold text-sm">Ollama</h3><p class="text-xs text-zinc-400 mt-1">Un comando para bajar y servir modelos locales.</p></div>
+            </div>
+        </section>
+
+        <!-- SANDBOX -->
+        <section id="sandbox" class="tab-content hidden space-y-4">
+            <h2 class="text-xl font-bold mb-2">Sandbox de demostración</h2>
+            <div class="bg-zinc-900 border border-zinc-800 p-5 rounded-lg space-y-4">
+                <p class="text-xs text-zinc-400">Simula tres controles: perímetro, huella criptográfica y kill-switch.</p>
+                <div class="bg-zinc-950 p-3 rounded font-mono text-xs text-green-400 border border-zinc-800">
+                    pesos-simulado::llama-open-v3
+                </div>
+                <button onclick="alert('SHA-256 Calculado: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-black font-medium text-xs rounded transition">
+                    Calcular SHA-256
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-zinc-800', 'text-cyan-400', 'font-medium');
+                el.classList.add('text-zinc-400');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            event.currentTarget.classList.add('bg-zinc-800', 'text-cyan-400', 'font-medium');
+            event.currentTarget.classList.remove('text-zinc-400');
+        }
+
+        let currentRisk = 94;
+        function toggleDefense(btn, reduction) {
+            if(btn.innerText === "Activar") {
+                btn.innerText = "Desactivar";
+                btn.classList.add('bg-cyan-600', 'text-black', 'font-bold');
+                currentRisk = Math.max(0, currentRisk - reduction);
+            } else {
+                btn.innerText = "Activar";
+                btn.classList.remove('bg-cyan-600', 'text-black', 'font-bold');
+                currentRisk = Math.min(100, currentRisk + reduction);
+            }
+            document.getElementById('riesgo-num').innerText = currentRisk;
+            document.getElementById('riesgo-bar').style.width = currentRisk + '%';
+        }
+    </script>
+</body>
+</html>
