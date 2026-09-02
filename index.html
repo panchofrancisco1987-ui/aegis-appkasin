@@ -190,5 +190,67 @@
             document.getElementById('riesgo-bar').style.width = currentRisk + '%';
         }
     </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let baseRisk = 94;
+    const defenseCards = document.querySelectorAll('.defense-card, [id*="defensa"], .card');
+    
+    defenseCards.forEach((card) => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+            card.classList.toggle('active-defense');
+            if (card.classList.contains('active-defense')) {
+                card.style.borderColor = '#10B981';
+                baseRisk = Math.max(12, baseRisk - 10);
+            } else {
+                card.style.borderColor = '';
+                baseRisk = Math.min(94, baseRisk + 10);
+            }
+            updateRiskDisplay(baseRisk);
+        });
+    });
+
+    function updateRiskDisplay(val) {
+        const target = document.querySelector('h1 + p + div span, .risk-residual-value, b');
+        if (target) target.textContent = val;
+    }
+
+    const attackerSteps = document.querySelectorAll('#Atacante .card, [data-tab="atacante"] .card');
+    attackerSteps.forEach(step => {
+        step.addEventListener('click', () => {
+            const title = step.querySelector('h3, h4')?.textContent || 'Fase seleccionada';
+            alert(`Simulador táctico Activo:\nAnalizando vector para -> ${title}`);
+        });
+    });
+
+    const licenseSection = document.querySelector('#Licencias, [data-tab="licencias"]');
+    if (licenseSection) {
+        const selectorHtml = `
+            <div style="margin: 15px 0; padding: 10px; background: #1a1a1a; border-radius: 8px;">
+                <label style="color: #fff; display: block; margin-bottom: 5px;">Seleccionar Marco de Licencia:</label>
+                <select id="license-selector" style="width: 100%; padding: 8px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px;">
+                    <option value="llama3">Llama 3 Community (Restrictiva con apariencia abierta)</option>
+                    <option value="mit">MIT (Permisiva abierta)</option>
+                    <option value="openrail">OpenRAIL-M (Uso responsable condicionado)</option>
+                </select>
+            </div>
+        `;
+        licenseSection.insertAdjacentHTML('afterbegin', selectorHtml);
+
+        document.getElementById('license-selector').addEventListener('change', (e) => {
+            const val = e.target.value;
+            const desc = licenseSection.querySelector('p');
+            if (val === 'mit') {
+                if (desc) desc.textContent = "Licencia MIT: Uso comercial ilimitado, sin restricciones de kill-switch ni trazabilidad forzosa.";
+            } else if (val === 'openrail') {
+                if (desc) desc.textContent = "OpenRAIL-M: Restricciones de uso final integradas. Prohibido uso militar o de alto riesgo ético.";
+            } else {
+                if (desc) desc.textContent = "Llama 3 Community: Restrictiva con apariencia abierta. Límite de 700M MAU y restricciones de salida.";
+            }
+        });
+    }
+});
+</script>
+
 </body>
 </html>
