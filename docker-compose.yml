@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  aegis-api:
+    build:
+      context: ./src
+      dockerfile: Aegis.Governance.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Aegis__ApiKey=aegis_dev_key_12345
+      - Aegis__KmsKeyArn=arn:aws:kms:us-east-1:123456789012:key/demo-key
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=aegis
+      - POSTGRES_USER=aegis
+      - POSTGRES_PASSWORD=dev_password_123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:

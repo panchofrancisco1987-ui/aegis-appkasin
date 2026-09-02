@@ -1,0 +1,27 @@
+wsl --version
+
+WSL version: 2.7.12.0
+Kernel version: 6.18.33.2-2
+WSLg version: 1.0.73.2
+MSRDC version: 1.2.7214
+Direct3D version: 1.611.1-81528511
+DXCore version: 10.0.26100.1-240331-1435.ge-release
+Windows version: 10.0.26200.9106
+lsb_release -a
+
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 26.04 LTS
+Release:        26.04
+Codename:       resolute
+copilot --version
+
+GitHub Copilot CLI 1.0.82.
+cat /proc/21178/status | egrep 'VmRSS|VmSize'
+
+VmSize: 55347188 kB
+VmRSS:  30937176 kB
+ps aux --sort=-%cpu | head -20
+
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+<redacted>    21178 57.3 94.9 55348468 30936924 pts/2 Sl+ 12:24  93:52 /home/<redacted>/.local/bin/copilot

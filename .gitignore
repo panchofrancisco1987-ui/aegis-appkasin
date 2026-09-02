@@ -1,0 +1,11 @@
+appsettings.json
+appsettings.Development.json
+.env
+bin/
+obj/
+publish/
+.vs/
+.vscode/
+.idea/
+logs/
+*.log
