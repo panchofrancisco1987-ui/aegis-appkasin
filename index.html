@@ -238,6 +238,73 @@ document.addEventListener('DOMContentLoaded', () => {
         licenseSection.insertAdjacentHTML('afterbegin', selectorHtml);
 
         document.getElementById('license-selector').addEventListener('change', (e) => {
+<script>
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-zinc-800', 'text-cyan-400', 'font-medium');
+        el.classList.add('text-zinc-400');
+    });
+    const targetTab = document.getElementById(tabId) || document.getElementById(tabId.toLowerCase());
+    if(targetTab) targetTab.classList.remove('hidden');
+    event.currentTarget.classList.add('bg-zinc-800', 'text-cyan-400', 'font-medium');
+    event.currentTarget.classList.remove('text-zinc-400');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Ocultar todas las pestañas al inicio excepto la primera
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach((el, index) => {
+        if(index !== 0) el.classList.add('hidden');
+    });
+
+    // 1. Interactividad en Tarjetas y Riesgo Residual
+    let currentRisk = 94;
+    const allCards = document.querySelectorAll('main div, section div, .card');
+    allCards.forEach(card => {
+        if (card.innerText && (card.innerText.includes('Reconocimiento') || card.innerText.includes('Exfiltración') || card.innerText.includes('Mutación') || card.innerText.includes('Crítica') || card.innerText.includes('Alta'))) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                card.classList.toggle('border-cyan-500');
+                card.classList.toggle('bg-zinc-800');
+                if (card.classList.contains('border-cyan-500')) {
+                    currentRisk = Math.max(10, currentRisk - 12);
+                } else {
+                    currentRisk = Math.min(94, currentRisk + 12);
+                }
+                const riskDisplay = document.querySelector('h1 + p + div span, .risk-residual-value, b');
+                if (riskDisplay) riskDisplay.textContent = currentRisk;
+            });
+        }
+    });
+
+    // 2. Selector Dinámico de Licencias
+    const licenciasSection = document.getElementById('licencias') || document.querySelector('[id*="licencia"]');
+    if (licenciasSection && !document.getElementById('license-selector')) {
+        const selectorHtml = `
+            <div style="margin: 15px 0; padding: 12px; background: #18181b; border: 1px solid #27272a; border-radius: 8px;">
+                <label style="color: #38bdf8; display: block; margin-bottom: 8px; font-weight: bold;">Simulador de Marco de Licencias:</label>
+                <select id="license-selector" style="width: 100%; padding: 10px; background: #09090b; color: #fff; border: 1px solid #3f3f46; border-radius: 6px;">
+                    <option value="llama3">Llama 3 Community (Restrictiva con supervisión)</option>
+                    <option value="mit">MIT (Permisiva abierta)</option>
+                    <option value="openrail">OpenRAIL-M (Uso responsable condicionado)</option>
+                </select>
+            </div>
+        `;
+        licenciasSection.insertAdjacentHTML('afterbegin', selectorHtml);
+        document.getElementById('license-selector').addEventListener('change', (e) => {
+            const val = e.target.value;
+            const desc = licenciasSection.querySelector('p');
+            if (desc) {
+                if (val === 'mit') desc.textContent = "Licencia MIT: Uso comercial ilimitado, sin restricciones de kill-switch ni trazabilidad forzosa.";
+                else if (val === 'openrail') desc.textContent = "OpenRAIL-M: Restricciones de uso final integradas. Prohibido uso militar o de alto riesgo ético.";
+                else desc.textContent = "Llama 3 Community: Restrictiva con apariencia abierta. Límite de 700M MAU y restricciones de salida.";
+            }
+        });
+    }
+});
+</script>
             const val = e.target.value;
             const desc = licenseSection.querySelector('p');
             if (val === 'mit') {
@@ -254,3 +321,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+<script>
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-zinc-800', 'text-cyan-400', 'font-medium');
+        el.classList.add('text-zinc-400');
+    });
+    const targetTab = document.getElementById(tabId);
+    if(targetTab) targetTab.classList.remove('hidden');
+    if(event && event.currentTarget) {
+        event.currentTarget.classList.add('bg-zinc-800', 'text-cyan-400', 'font-medium');
+        event.currentTarget.classList.remove('text-zinc-400');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach((el, index) => {
+        if(index !== 0) el.classList.add('hidden');
+    });
+
+    const riskSpan = document.querySelector('h1 + p + div span:last-child, .risk-residual-value, b');
+    if (riskSpan && !riskSpan.id) {
+        riskSpan.id = 'risk-val';
+    }
+
+    let currentRisk = 94;
+
+    document.querySelectorAll('main div, section div').forEach(card => {
+        if (card.innerText && (card.innerText.includes('Reconocimiento') || card.innerText.includes('Exfiltración') || card.innerText.includes('Control') || card.innerText.includes('Pérdida') || card.innerText.includes('Licencias'))) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                card.classList.toggle('border-cyan-500');
+                card.classList.toggle('bg-zinc-800/80');
+                
+                if (card.classList.contains('border-cyan-500')) {
+                    currentRisk = Math.max(10, currentRisk - 15);
+                } else {
+                    currentRisk = Math.min(94, currentRisk + 15);
+                }
+                
+                const display = document.getElementById('risk-val') || document.querySelector('h1 + p + div span:last-child');
+                if (display) display.textContent = currentRisk;
+            });
+        }
+    });
+
+    const licSection = document.getElementById('licencias') || document.querySelector('[id*="licencia"]');
+    if (licSection && !document.getElementById('license-selector')) {
+        const selectorHtml = `
+            <div style="margin: 15px 0; padding: 12px; background: #18181b; border: 1px solid #27272a; border-radius: 8px;">
+                <label style="color: #38bdf8; display: block; margin-bottom: 8px; font-weight: bold;">Simulador de Marco de Licencias:</label>
+                <select id="license-selector" style="width: 100%; padding: 10px; background: #09090b; color: #fff; border: 1px solid #3f3f46; border-radius: 6px;">
+                    <option value="llama3">Llama 3 Community (Restrictiva con supervisión)</option>
+                    <option value="mit">MIT (Permisiva abierta)</option>
+                    <option value="openrail">OpenRAIL-M (Uso responsable condicionado)</option>
+                </select>
+            </div>
+        `;
+        licSection.insertAdjacentHTML('afterbegin', selectorHtml);
+        document.getElementById('license-selector').addEventListener('change', (e) => {
+            const val = e.target.value;
+            const desc = licSection.querySelector('p');
+            if (desc) {
+                if (val === 'mit') desc.textContent = "Licencia MIT: Uso comercial ilimitado, sin restricciones de kill-switch ni trazabilidad forzosa.";
+                else if (val === 'openrail') desc.textContent = "OpenRAIL-M: Restricciones de uso final integradas. Prohibido uso militar o de alto riesgo ético.";
+                else desc.textContent = "Llama 3 Community: Restrictiva con apariencia abierta. Límite de 700M MAU y restricciones de salida.";
+            }
+        });
+    }
+});
+</script>
+
